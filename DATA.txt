@@ -1,0 +1,11 @@
+https://github.com/photonstorm/phaser/pull/3300/commits/3f2e63fc17eced86977a92aabfc555e5f2f94642
+
+https://github.com/samme/kristal-quest/blob/master/app.js#L896
+
+https://github.com/samme/cavern-quest/blob/master/src/app/playScene.js
+
+https://github.com/deswebcom/ball-game-phaser/blob/master/src/scenes/game.js
+
+https://www.html5gamedevs.com/topic/36148-phaser-3-scene-phaser-2-state-passing-data-to-init-when-start/
+
+https://github.com/photonstorm/phaser/blob/v3.54.0/src/gameobjects/components/Size.js#L171
