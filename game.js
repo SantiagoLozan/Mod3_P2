@@ -29,10 +29,10 @@ export default class Juego extends Phaser.Scene {
 
   preload() {
     // load assets
-    this.load.image("background", "/assets/background.png");
-    this.load.image("base", "/assets/base.png");
-    this.load.image("esfera", "/assets/esfera.png");
-    this.load.image("obstaculo", "/assets/platform.png");
+    this.load.image("background", "./assets/background.png");
+    this.load.image("base", "./assets/base.png");
+    this.load.image("esfera", "./assets/esfera.png");
+    this.load.image("obstaculo", "./assets/platform.png");
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
