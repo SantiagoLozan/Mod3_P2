@@ -102,6 +102,7 @@ export default class Juego extends Phaser.Scene {
       .setImmovable(true)
       .setScale(escalaAleatoria);
     obstaculo.setOrigin(0.5, 0.5);
+    obstaculo.refreshBody();
 
     const nuevoAncho = obstaculo.width * escalaAleatoria;
     const nuevoAlto = obstaculo.height * escalaAleatoria;
