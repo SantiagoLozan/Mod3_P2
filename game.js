@@ -1,12 +1,29 @@
+/*class Nivel {
+  constructor(_contadorNivel, velocidadInicial) {
+    this.contadorNivel = 0;
+    this.contadorBounce = 0;
+    this.velocidadInicial = velocidadInicial;
+    this.velocidadActual = velocidadInicial + this.velocidadActual;
+    this.obstaculos = [];
+    console.log(Nivel);
+  }
+
+  aumentarVelocidad(porcentaje) {
+    this.velocidadActual *= 1 + porcentaje / 100;
+  }
+
+  agregarObstaculo(obstaculo) {
+    this.obstaculos.push(obstaculo);
+  }
+}*/
+
 export default class Juego extends Phaser.Scene {
   constructor() {
-    // key of the scene
-    // the key will be used to start the scene by other scenes
     super("juego");
   }
+
   init() {
-    this.contadorBounce = 0;
-    this.contadorNivel = 0;
+    this.contadorNivel = 1;
   }
 
   preload() {
@@ -34,7 +51,7 @@ export default class Juego extends Phaser.Scene {
       .setImmovable(true)
       .setCollideWorldBounds(true);
     this.base.body.allowGravity = false;
-
+    this.camera = this.cameras.main;
     this.obstaculos = this.physics.add.group();
 
     this.physics.world.setBoundsCollision(true, true, true, true);
@@ -46,6 +63,11 @@ export default class Juego extends Phaser.Scene {
       null,
       this
     );
+    this.textoNivel = this.add.text(16, 16, "Nivel: 1", {
+      fontSize: "20px",
+      fill: "#fff",
+      fontFamily: "verdana, arial, sans-serif",
+    });
   }
 
   update() {
@@ -72,13 +94,22 @@ export default class Juego extends Phaser.Scene {
   agregarObstaculo() {
     const randomX = Phaser.Math.RND.between(0, 800);
     const randomY = Phaser.Math.RND.between(0, 300);
-    this.obstaculos.create(randomX, randomY, "obstaculo", 0, true);
+    const escalaAleatoria = Phaser.Math.RND.between(20, 70) / 100;
+    this.obstaculos
+      .create(randomX, randomY, "obstaculo", 0, true)
+      .setImmovable(true)
+      .setScale(escalaAleatoria);
   }
 
   pasarNivel() {
     this.contadorBounce = 0;
     this.contadorNivel++;
-    console.log("Nivel : ", this.contadorNivel);
+    this.textoNivel.setText("Nivel: " + this.contadorNivel);
+    const nivelOpacity = 1 - this.contadorNivel * 0.09;
+
+    // Limita la opacidad mínima para evitar que se vuelva completamente transparente
+    const minOpacity = 0.1;
+    this.cameras.main.setAlpha(Math.max(nivelOpacity, minOpacity));
     this.agregarObstaculo();
     this.aumentarVelocidadEsfera();
   }
@@ -86,8 +117,9 @@ export default class Juego extends Phaser.Scene {
   contadorRebote(esfera, base) {
     this.contadorBounce++;
     console.log(this.contadorBounce);
-    if (this.contadorBounce === 2) {
+    if ((this.contadorBounce = 2)) {
       this.pasarNivel();
     }
   }
 }
+export { Juego /*Nivel*/ };
